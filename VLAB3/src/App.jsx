@@ -12,11 +12,18 @@ function getText(argument){
 function App() {
   const [count, setCount] = useState(0)
   const [cesar,setCesar]=useState("");
+  const [affiche,setAffiche]=useState("");
   useEffect(()=>{
-    fetch("http://localhost:3001/test")
+    fetch("http://localhost:3001/all")
       .then(res=>res.json())
-      .then(data=>console.log("PTG:",data));
-  },[])
+      .then(data=>setAffiche(data));
+  },
+   fetch("http://locahost:3011/all",{
+    method:"POST",
+    headers:{"Texte":"all.json"},
+    body:JSON.stringify({text:"Test"})})
+  ,[])
+
   return (
     <>
       <h1 className="text-left font-bold">Test</h1>
