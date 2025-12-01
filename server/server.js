@@ -7,10 +7,10 @@ app.use(cors());
 app.use(express.json());
 
 const pool=new Pool({
-    user:"postgres",
+    user:"all",
     host:"localhost",
     database:"vlab3",
-    password:"password",
+    password:"",
     port:5432
 });
 
@@ -19,4 +19,4 @@ app.get("/test",async(req, res)=>{
     res.json(result.rows);
 });
 
-app.listen(3001,()=>console.log("API OK"))
+app.listen(3001,()=>{console.log("API OK")});
