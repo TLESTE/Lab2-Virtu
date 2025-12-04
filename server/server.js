@@ -19,8 +19,15 @@ app.get("/all",async(req, res)=>{
     res.json(result.rows);
 });
 app.post("/all",async(req,res)=>{
-    const {text}=req.body;
-    const result=await pool.query("INSERT (text) VALUE ($1)",[text]);
-    res.json({ok:true});
-})
+    try{
+        const {text}=req.body;
+        await pool.query("INSERT INTO Texte (content) VALUES ($1",[text]);
+        res.json({status:"ok"});
+    }catch (err){
+        console.error("Raté");
+        res.status(500).json({error: "Erreur serveur"});
+    }
+    
+
+});
 app.listen(3001,()=>{console.log("API OK")});

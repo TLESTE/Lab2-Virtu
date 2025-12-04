@@ -21,18 +21,31 @@ function App() {
    fetch("http://locahost:3011/all",{
     method:"POST",
     headers:{"Texte":"all.json"},
-    body:JSON.stringify({text:"Test"})})
+    body:JSON.stringify({})})
   ,[])
+
+  const handleSubmit=async e=>{
+    e.preventDefault();
+    const result=getText(cesar);
+    console.log("texte",result);
+    await fetch("http://localhost:3001/all",{
+      method:"POST",
+      headers:{"Content-Type":"app/json"},
+    body:JSON.stringify({text:result}),
+    }
+    );
+  }
 
   return (
     <>
-      <h1 className="text-left font-bold">Test</h1>
-      <div className="center border border-white/20 rounded-xl">
-        <h2>Entrez votre valeur</h2>
-        <form method='post' onSubmit={(e)=>{e.preventDefault(); getText(cesar);}}>
-            <input value={cesar} name="cesar" className="text-white/90" type="text" onChange={(e)=>setCesar(e.target.value)}></input>
+    <div className='flex justify-center min-h-screen'>
+      <div className="flex flex-col my-2 w-[500px] h-[70px] items-center border-[1px] border-black/80 bg-white">
+        <h2 className='text-black text-center border-b w-full'>Entrez votre valeur</h2>
+        <form className='my-3 border border-black/90' method='post' onSubmit={(e)=>{e.preventDefault(); getText(cesar);}}>
+            <input value={cesar} name="cesar" className="text-black/90" type="text" placeholder="Gros cul" onChange={(e)=>setCesar(e.target.value)}></input>
         </form>
       </div>
+    </div>  
     </>
   )
 }
