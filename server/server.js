@@ -15,16 +15,17 @@ const pool=new Pool({
 });
 
 app.get("/all",async(req, res)=>{
-    const result=await pool.query("SELECT *");
+    const result=await pool.query("SELECT * FROM Texte");
     res.json(result.rows);
 });
 app.post("/all",async(req,res)=>{
     try{
+        console.log(req.body);
         const {text}=req.body;
-        await pool.query("INSERT INTO Texte (content) VALUES ($1",[text]);
+        await pool.query("INSERT INTO texte (content) VALUES ($1)",[text]);
         res.json({status:"ok"});
     }catch (err){
-        console.error("Raté");
+        console.error("Raté",err);
         res.status(500).json({error: "Erreur serveur"});
     }
     
