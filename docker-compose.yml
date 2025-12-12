@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ton_mdp
+      POSTGRES_DB: vlab3
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    build: ./server
+    depends_on:
+      - postgres
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: ton_mdp
+      PGHOST: postgres
+      PGDATABASE: vlab3
+      PGPORT: 5432
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./server:/app
+
+  client:
+    build: ./client
+    depends_on:
+      - server
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+    command: ["npm", "run", "dev", "--", "--host"]
+
+volumes:
+  pgdata:

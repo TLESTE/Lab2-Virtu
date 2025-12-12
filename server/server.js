@@ -6,12 +6,12 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
-const pool=new Pool({
-    user:"postgres",
-    host:"localhost",
-    database:"vlab3",
-    password:"ton_mdp",
-    port:5432
+const pool = new Pool({
+    user: "postgres",//process.env.PGUSER,
+    host: "host.docker.internal", //process.env.PGHOST
+    database: "vlab3",//process.env.PGDATABASE,
+    password: "ton_mdp",//process.env.PGPASSWORD,
+    port: 5432,//process.env.PGPORT,
 });
 
 app.get("/all",async(req, res)=>{
