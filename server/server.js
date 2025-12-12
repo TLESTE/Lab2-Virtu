@@ -7,15 +7,15 @@ app.use(cors());
 app.use(express.json());
 
 const pool = new Pool({
-    user: "postgres",//process.env.PGUSER,
-    host: "host.docker.internal", //process.env.PGHOST
-    database: "vlab3",//process.env.PGDATABASE,
-    password: "ton_mdp",//process.env.PGPASSWORD,
-    port: 5432,//process.env.PGPORT,
+    user:process.env.PGUSER,
+    host: process.env.PGHOST,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
 });
 
 app.get("/all",async(req, res)=>{
-    const result=await pool.query("SELECT * FROM Texte");
+    const result=await pool.query("SELECT * FROM texte");
     res.json(result.rows);
 });
 app.post("/all",async(req,res)=>{
