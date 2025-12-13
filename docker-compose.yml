@@ -37,6 +37,17 @@ services:
       - "5173:5173"
 
     command: ["npm", "run", "dev", "--", "--host"]
+  
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER: postgres
+      - POSTGRES_PASSWORD: ton_mdp
+      - POSTGRES_DB: vlab3
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   pgdata:

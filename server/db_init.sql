@@ -1,0 +1,4 @@
+CREATE TABLE texte (
+  id SERIAL PRIMARY KEY,
+  content TEXT NOT NULL
+);
