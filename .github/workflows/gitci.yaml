@@ -27,14 +27,14 @@ jobs:
       - name: Build and push your image of Web app to Docker
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Path_to_the_dockerfile_from_gitpull_root_folder
+          context: ./client
+          file: ./client/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/repository_web_name:your_tag
       - name: Build and push your image of the DB to Docker
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./Path_to_the_dockerfile_from_gitpull_root_folder
+          context: ./server
+          file: ./server/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/repository__db_name:your_tag
