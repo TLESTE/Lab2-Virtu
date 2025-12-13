@@ -3,6 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+const API_URL=import.meta.env.VITE_API_URL;
+
 function getText(argument){
   const arg=argument;
   console.log(arg)
@@ -31,7 +33,7 @@ function App() {
   
   useEffect(()=>{
     const fetchData=async()=>{
-      const res=await fetch("http://localhost:3001/all");
+      const res=await fetch(`${API_URL}/all`);
       const json=await res.json();
       setAffiche(json);
       localStorage.setItem("textouilles",JSON.stringify(json));
